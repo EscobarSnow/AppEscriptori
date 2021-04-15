@@ -23,4 +23,8 @@ public class ConnexioBD {
         Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
         
     }
+
+    public Statement createStatement() {
+        return null;
+    }
 }
