@@ -5,6 +5,7 @@
  */
 package escobarsnow;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 import escobarsnow.GuardarArray;
 
@@ -17,7 +18,7 @@ public class Escobarsnow {
     static Scanner teclat = new Scanner (System.in);
     static String opcio;
     
-    public static void main (String[] args) {
+    public static void main (String[] args) throws SQLException {
         GuardarArray.saveArray();
 
     Scanner teclat = new Scanner(System.in);
@@ -63,65 +64,20 @@ public class Escobarsnow {
 
     switch (opcio){
 
+                        
                 case 1:
-                    while (!sortir) {
-                        System.out.println(" ==============================================================================================================");
-                        System.out.println("│                                                                                                             │");
-                        System.out.println("│ █████╗░████╗░███╗░░██╗░████╗░░██╗░████╗░░████╗██░░█╗░██╗░█╗░░░░░░░█╗ │\n" +
-                                           "│ █╔═══╝█╔═══╝█╔══█╗█╔═█╗█╔═██╗█╔═█╗█╔═██╗█╔═══╝███░█║█╔═█╗█║░░██╗░░█║ │\n" +
-                                           "│ ███╗░░╚███╗░█║░░╚╝█║░█║████╦╝████║████╔╝╚███╗░█╔███║█║░█║╚█╗████╗█╔╝ │\n" +
-                                           "│ █╔═╝░░░╚══█╗█║░░█╗█║░█║█╔═██╗█╔═█║█╔═██╗░╚══█╗█║╚██║█║░█║░███╔═███║░ │\n" +
-                                           "│ █████╗████╔╝╚███╔╝╚██╔╝████╦╝█║░█║█║░██║████╔╝█║░╚█║╚██╔╝░╚█╔╝░╚█╔╝░ │\n" +
-                                           "│ ╚════╝╚═══╝░░╚══╝░░╚═╝░╚═══╝░╚╝░╚╝╚╝░╚═╝╚═══╝░╚╝░░╚╝░╚═╝░░░╚╝░░░╚╝░░ │");
-                        System.out.println("│                                                                                                             │");
-                        System.out.println("│                                ____                _            _                                           │");
-                        System.out.println("│                               |  _ \\ _ __ ___   __| |_   _  ___| |_ ___  ___                                │");
-                        System.out.println("│                               | |_) | '__/ _ \\ / _` | | | |/ __| __/ _ \\/ __|                               │");
-                        System.out.println("│                               |  __/| | | (_) | (_| | |_| | (__| ||  __/\\__ \\                               │");
-                        System.out.println("│                               |_|   |_|  \\___/ \\__,_|\\__,_|\\___|\\__\\___||___/                               │");
-                        System.out.println("│                                                                                                             │");
-                        System.out.println(" ==============================================================================================================");
-
-                        Mostrar prod = new Mostrar();
-                        prod.mostrar();
-
-                        System.out.println("\nApreta RETURN per sortir....");
-
-                        teclat.nextLine();
-                        teclat.nextLine();
-                        //opcio=teclat.next();
-                    break;
+                    if (Mostrar.Mostrar()) {
+                    } else {
+                        System.out.println("Torna a intentar");
                     }
+                break;
+                
                 case 2:
-                    
+                    //insertar
                     break;
                 case 3:
-                while (!sortir) {
-                    System.out.println(" ==============================================================================================================");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println("│ █████╗░████╗░███╗░░██╗░████╗░░██╗░████╗░░████╗██░░█╗░██╗░█╗░░░░░░░█╗ │\n" +
-                                       "│ █╔═══╝█╔═══╝█╔══█╗█╔═█╗█╔═██╗█╔═█╗█╔═██╗█╔═══╝███░█║█╔═█╗█║░░██╗░░█║ │\n" +
-                                       "│ ███╗░░╚███╗░█║░░╚╝█║░█║████╦╝████║████╔╝╚███╗░█╔███║█║░█║╚█╗████╗█╔╝ │\n" +
-                                       "│ █╔═╝░░░╚══█╗█║░░█╗█║░█║█╔═██╗█╔═█║█╔═██╗░╚══█╗█║╚██║█║░█║░███╔═███║░ │\n" +
-                                       "│ █████╗████╔╝╚███╔╝╚██╔╝████╦╝█║░█║█║░██║████╔╝█║░╚█║╚██╔╝░╚█╔╝░╚█╔╝░ │\n" +
-                                       "│ ╚════╝╚═══╝░░╚══╝░░╚═╝░╚═══╝░╚╝░╚╝╚╝░╚═╝╚═══╝░╚╝░░╚╝░╚═╝░░░╚╝░░░╚╝░░ │");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println("│                                    ____                           _     _  _                      │");
-                    System.out.println("│                                   / ___| _ __  ___   __ _  _ __  | | __(_)| |_                     │");
-                    System.out.println("│                                  | |    | '__|/ _ \\ / _` || '__| | |/ /| || __|                     │");
-                    System.out.println("│                                  | |___ | |  |  __/| (_| || |    |   < | || |_                      │");
-                    System.out.println("│                                   \\____||_|   \\___| \\__,_||_|    |_|\\_\\|_| \\__|                         │");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println(" ==============================================================================================================");
-
-                   
-
-                    System.out.println("\nApreta RETURN per sortir....");
-
-                    teclat.nextLine();
-                    teclat.nextLine();
-                break;
-                }
+                    //crearkit
+                    break;
                 case 4:
                     if (MostrarKit.MostrarKit()) {
                     } else {
