@@ -6,6 +6,7 @@
 package escobarsnow;
 
 import java.util.Scanner;
+import escobarsnow.GuardarArray;
 
 /**
  *
@@ -17,15 +18,13 @@ public class Escobarsnow {
     static String opcio;
     
     public static void main (String[] args) {
+        GuardarArray.saveArray();
 
     Scanner teclat = new Scanner(System.in);
 
     boolean sortir=false;
     int opcio; //De string a int
             
-    
-
-
     //MENU DE L'APLICACIO
 
     while (!sortir) {
@@ -121,19 +120,14 @@ public class Escobarsnow {
 
                     teclat.nextLine();
                     teclat.nextLine();
-                    //opcio=teclat.next();
                 break;
                 }
                 case 4:
-                if (MostrarKit.MostrarKit()) {
-                } else {
-                    System.out.println("Torna a intentar");
-                }
-                    // System.out.println("\nApreta RETURN per sortir....");
-
-                    // teclat.nextLine();
-                    // teclat.nextLine();
-                    //opcio=teclat.next();
+                    if (MostrarKit.MostrarKit()) {
+                    } else {
+                        System.out.println("Torna a intentar");
+                    }
+                   
                 break;
                 
                 case 5:
@@ -146,4 +140,5 @@ public class Escobarsnow {
             }
         }
     }
+
 }

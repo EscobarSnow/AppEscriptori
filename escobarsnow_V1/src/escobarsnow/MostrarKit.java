@@ -1,26 +1,38 @@
 package escobarsnow;
 
 
-import escobarsnow.classes.*;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
+import java.text.SimpleDateFormat;  
+import java.util.Date;  
 
+import escobarsnow.classes.*;
+import escobarsnow.GuardarArray.*;
 
 
 public class MostrarKit {
     
     static Scanner teclat = new Scanner (System.in);
     static String opcio;
+
     public static int cercar = 0; 
-    private final int TAMANYARRAY = 200;
-    Bota[] botes = new Bota[200];
-    Esqui[] esquis = new Esqui[200];
-    Pal[] pals = new Pal[200];
+
+    private final int TA = 200;
+    // Bota[] botes;
+    // Esqui[] esquis;
+    // Pal[] pals;
+    Bota[] botes = GuardarArray.getBotes();
+    Esqui[] esquis = GuardarArray.getEsqui();
+    Pal[] pals =  GuardarArray.getPals();
+    Kit[] akits = GuardarArray.getKits();
+
     Kit[] kits = new Kit[200];
     Connection conn = null;
 
@@ -144,7 +156,7 @@ public class MostrarKit {
         return true;
     }
 
-    private void conseguirKitsDia() {
+    private void conseguirKitsDia() throws ParseException {
         
         boolean trobat = false;
         int x = 0;
@@ -153,12 +165,14 @@ public class MostrarKit {
         Scanner teclat = new Scanner(System.in);
 
         String data = teclat.next();
+
+        Date data1 = new SimpleDateFormat("dd/MM/yyyy").parse(data);
         
 
         while (!trobat){
             Kit kit = new Kit();
-            System.out.println("Kit: "+kits[x].getIdKit());
-            if (kits[x].getData() == data) {
+            // System.out.println("Kit: "+kits[x].getData());
+            if (kits[x].getData() == data1) {
                 System.out.println("Els kits trobats el dia " +data);
                 kit.toString();
                    trobat = true;
@@ -166,11 +180,7 @@ public class MostrarKit {
                 
             } else { x++;}
         }
-        if (cercar > 0) {
-            System.out.println("Els esquis existeixen");
-        } else{
-            System.out.println("Els esquis no existeixen");
-        }
+       
         visualitzarKits();
     }
 
@@ -178,6 +188,9 @@ public class MostrarKit {
     public static boolean kitMostrar() {
         MostrarKit tenda = new MostrarKit();
         tenda.showKits();
+
+
+
         return true;
     }
 
@@ -212,58 +225,49 @@ public class MostrarKit {
                     Kit kit = new Kit();
                     kit.setIdKit(rs.getInt("id_kit"));
                   
-                        System.out.println("Quanttat: "+esquis.length);
-                        boolean trobat = false;
-                        int x = 0;
-                        while (!trobat){
+                        boolean trobatEsq = false;
+                        int j = 0;
+                        while (!trobatEsq){
                         
                             int test = (rs.getInt("id_esquis"));
-                            System.out.println("esqui: "+esquis[x].getIdEsquis()+"test: "+test);
-                            if (esquis[x].getIdEsquis() == test) {
-                                System.out.println("Els esquis trobats");
-                                   kit.setEsqui(esquis[x]);
-                                   trobat = true;
+                            // System.out.println("esqui: "+esquis[j].getIdEsquis()+"test: "+test);
+                            if (esquis[j].getIdEsquis() == test) {
+                                // System.out.println("Els esquis trobats");
+                                   kit.setEsqui(esquis[j]);
+                                   trobatEsq = true;
                                 cercar++;
-                            } else { x++;}
+                            } else { j++;}
                         }
-                        if (cercar > 0) {
-                            System.out.println("Els esquis existeixen");
-                        } else{
-                            System.out.println("Els esquis no existeixen");
-                        }
+                       
+                        boolean trobatBot = false;
+                        int k = 0;
 
-                        while (!trobat){
+                        while (!trobatBot){
                         
                             int test = (rs.getInt("id_botes"));
-                            System.out.println("Botas: "+botes[x].getIdBotes()+"test: "+test);
-                            if (botes[x].getIdBotes() == test) {
-                                System.out.println("Les botes trobades");
-                                   kit.setBota(botes[x]);
-                                   trobat = true;
+                            // System.out.println("Botas: "+botes[k].getIdBotes()+"test: "+test);
+                            if (botes[k].getIdBotes() == test) {
+                                // System.out.println("Les botes trobades");
+                                   kit.setBota(botes[k]);
+                                   trobatBot = true;
                                 cercar++;
-                            } else { x++;}
+                            } else { k++;}
                         }
-                        if (cercar > 0) {
-                            System.out.println("Les botes existeixen");
-                        } else{
-                            System.out.println("Les botes no existeixen");
-                        }
-                        while (!trobat){
+                        
+                        boolean trobatPal = false;
+                        int l = 0;
+                        while (!trobatPal){
                         
                             int test = (rs.getInt("id_pals"));
-                            System.out.println("Pal: "+pals[x].getIdPals()+"test: "+test);
-                            if (pals[x].getIdPals() == test) {
-                                System.out.println("Els pals trobats");
-                                   kit.setPal(pals[x]);
-                                   trobat = true;
+                            // System.out.println("Pal: "+pals[l].getIdPals()+"test: "+test);
+                            if (pals[l].getIdPals() == test) {
+                                // System.out.println("Els pals trobats");
+                                   kit.setPal(pals[l]);
+                                   trobatPal = true;
                                 cercar++;
-                            } else { x++;}
+                            } else { l++;}
                         }
-                        if (cercar > 0) {
-                            System.out.println("Els pals existeixen");
-                        } else{
-                            System.out.println("Els pals no existeixen");
-                        }
+                        
  
                     kits[i] = kit;
 
@@ -285,7 +289,7 @@ public class MostrarKit {
         System.out.println("");
        System.out.println("ELS KITS QUE HI HAN SÓN: \n");
    
-           for(int i = 0; (i < TAMANYARRAY && kits[i] !=null); i++){
+           for(int i = 0; (i < TA && kits[i] !=null); i++){
                System.out.println("Kits: " + kits[i]);
            }
     } 

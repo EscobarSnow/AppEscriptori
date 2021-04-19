@@ -31,9 +31,9 @@ public class Mostrar {
 
         //FEM LA CONNEXIÓ AMB LA BD    
 
-        //Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
-        ConnexioBD conn = new ConnexioBD();
-        conn.connbd();
+        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
+        // ConnexioBD conn = new ConnexioBD();
+        // conn.connbd();
 
         //COMANDA PER A MOSTRAR TOTS ELS PRODUCTES
 

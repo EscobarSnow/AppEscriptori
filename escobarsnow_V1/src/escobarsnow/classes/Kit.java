@@ -1,11 +1,14 @@
 package escobarsnow.classes;
+
+import java.sql.Date;
+
 public class Kit {
     private int idKit;
     private double preuTotal;
     private Esqui esqui;
     private Bota bota;
     private Pal pal;
-    private String data;
+    private Date data;
 
    
 
@@ -15,7 +18,7 @@ public class Kit {
     
     }
 
-    public void Kits(int idKit, double preuTotal, Esqui esqui, Bota bota, Pal pal, String data) {
+    public void Kits(int idKit, double preuTotal, Esqui esqui, Bota bota, Pal pal, Date data) {
         this.idKit = idKit;
         this.preuTotal = this.esqui.getPreuEsquis()+this.bota.getPreuBotes()+this.pal.getPreuPals();
         this.esqui = esqui;
@@ -63,12 +66,12 @@ public class Kit {
         this.pal = pal;
     }
 
-    public String getData() {
+    public Date getData() {
         return this.data;
     }
 
-    public void setData(String data) {
-        this.data = data;
+    public void setData(Date date) {
+        this.data = date;
     }
     
     public String toString() {

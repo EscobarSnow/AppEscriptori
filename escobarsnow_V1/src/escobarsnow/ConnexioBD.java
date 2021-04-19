@@ -24,7 +24,7 @@ public class ConnexioBD {
         
     }
 
-    public Statement createStatement() {
-        return null;
-    }
+    // public Statement createStatement() {
+    //     return null;
+    // }
 }
