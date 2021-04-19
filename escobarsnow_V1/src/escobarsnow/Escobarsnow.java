@@ -21,7 +21,7 @@ public class Escobarsnow {
     Scanner teclat = new Scanner(System.in);
 
     boolean sortir=false;
-    String opcio;
+    int opcio; //De string a int
             
     
 
@@ -58,11 +58,11 @@ public class Escobarsnow {
         System.out.println("│                                                                                                             │");
         System.out.println(" ==============================================================================================================");
 
-        opcio=teclat.next();
+        opcio=teclat.nextInt();
 
     //OCIONS DEL MENU PER CRIDAR CADA METODE
 
-    switch (opcio.charAt(0)){
+    switch (opcio){
 
                 case 1:
                     while (!sortir) {
@@ -125,61 +125,17 @@ public class Escobarsnow {
                 break;
                 }
                 case 4:
-                while (!sortir) {
-                    System.out.println(" ==============================================================================================================");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println("│ █████╗░████╗░███╗░░██╗░████╗░░██╗░████╗░░████╗██░░█╗░██╗░█╗░░░░░░░█╗ │\n" +
-                                       "│ █╔═══╝█╔═══╝█╔══█╗█╔═█╗█╔═██╗█╔═█╗█╔═██╗█╔═══╝███░█║█╔═█╗█║░░██╗░░█║ │\n" +
-                                       "│ ███╗░░╚███╗░█║░░╚╝█║░█║████╦╝████║████╔╝╚███╗░█╔███║█║░█║╚█╗████╗█╔╝ │\n" +
-                                       "│ █╔═╝░░░╚══█╗█║░░█╗█║░█║█╔═██╗█╔═█║█╔═██╗░╚══█╗█║╚██║█║░█║░███╔═███║░ │\n" +
-                                       "│ █████╗████╔╝╚███╔╝╚██╔╝████╦╝█║░█║█║░██║████╔╝█║░╚█║╚██╔╝░╚█╔╝░╚█╔╝░ │\n" +
-                                       "│ ╚════╝╚═══╝░░╚══╝░░╚═╝░╚═══╝░╚╝░╚╝╚╝░╚═╝╚═══╝░╚╝░░╚╝░╚═╝░░░╚╝░░░╚╝░░ │");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println("│                                   __  __              _                       _     _  _                                         │");
-                    System.out.println("│                                  |  \\/  |  ___   ___ | |_  _ __  __ _  _ __  | | __(_)| |_                                        │");
-                    System.out.println("│                                  | |\\/| | / _ \\ / __|| __|| '__|/ _` || '__| | |/ /| || __|                                         │");
-                    System.out.println("│                                  | |  | || (_) |\\__ \\| |_ | |  | (_| || |    |   < | || |_                                         │");
-                    System.out.println("│                                  |_|  |_| \\___/ |___/ \\__||_|   \\__,_||_|    |_|\\_\\|_| \\__|                                                  │");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println(" ==============================================================================================================");
-                    System.out.println("│  _      _  __ _  _         _        _       _  _                                                                                                                   │");
-                    System.out.println("│ / |    | |/ /(_)| |_    __| |  ___ | |   __| |(_)  __ _                                                                                                            │");
-                    System.out.println("│ | |    | ' / | || __|  / _` | / _ \\| |  / _` || | / _` |                                                                                                           │");
-                    System.out.println("│ | | _  | . \\ | || |_  | (_| ||  __/| | | (_| || || (_| |                                                                                                           │");
-                    System.out.println("│ |_|(_) |_|\\_\\|_| \\__|  \\__,_| \\___||_|  \\__,_||_| \\__,_|                                                                                                           │");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println("│ ____       _  __ _  _                                                                                                                 │");
-                    System.out.println("│ |___ \\     | |/ /(_)| |_  ___                                                                                                          │");
-                    System.out.println("│   __) |    | ' / | || __|/ __|                                                                                                         │");
-                    System.out.println("│  / __/  _  | . \\ | || |_ \\__ \\                                                                                                         │");
-                    System.out.println("│ |_____|(_) |_|\\_\\|_| \\__||___/                                                                                                         │");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println("│ _____     _  __ _  _                  __                                                                                                                                  │");
-                    System.out.println("│ |___ /    | |/ /(_)| |_   _ __ ___    /_/  ___    ___  __ _  _ __                                                                                                           │");
-                    System.out.println("│   |_ \\    | ' / | || __| | '_ ` _ \\  / _ \\/ __|  / __|/ _` || '__|                                                                                                         │");
-                    System.out.println("│  ___) |_  | . \\ | || |_  | | | | | ||  __/\\__ \\ | (__| (_| || |                                                                                                            │");
-                    System.out.println("│ |____/(_) |_|\\_\\|_| \\__| |_| |_| |_| \\___||___/  \\___|\\__,_||_|                                                                                                           │");
-                    System.out.println("│                                                                                                            │");
-                    System.out.println("│  _  _       _____                                                                                                                                         │");
-                    System.out.println("│ | || |     |_   _|___   _ __  _ __    __ _  _ __                                                                                                          │");
-                    System.out.println("│ | || |_      | | / _ \\ | '__|| '_ \\  / _` || '__|                                                                                                         │");
-                    System.out.println("│ |__   _|_    | || (_) || |   | | | || (_| || |                                                                                                            │");
-                    System.out.println("│    |_| (_)   |_| \\___/ |_|   |_| |_| \\__,_||_|                                                                                                           │");
-                    System.out.println("│                                                                                                             │");
-                    System.out.println(" ==============================================================================================================");
+                if (MostrarKit.MostrarKit()) {
+                } else {
+                    System.out.println("Torna a intentar");
+                }
+                    // System.out.println("\nApreta RETURN per sortir....");
 
-
-                   
-                   
-                   
-                   
-                    System.out.println("\nApreta RETURN per sortir....");
-
-                    teclat.nextLine();
-                    teclat.nextLine();
+                    // teclat.nextLine();
+                    // teclat.nextLine();
                     //opcio=teclat.next();
                 break;
-                }
+                
                 case 5:
                     System.out.println("Fins una altra.");
                     sortir=true;
