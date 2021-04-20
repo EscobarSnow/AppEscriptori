@@ -76,7 +76,10 @@ public class Escobarsnow {
                     //insertar
                     break;
                 case 3:
-                    //crearkit
+                    if (CrearKit.CrearKit()) {
+                    } else {
+                        System.out.println("Torna a intentar");
+                    }
                     break;
                 case 4:
                     if (MostrarKit.MostrarKit()) {
