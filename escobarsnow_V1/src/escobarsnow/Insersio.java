@@ -2,7 +2,9 @@ package escobarsnow;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Scanner;
 
@@ -11,8 +13,15 @@ import escobarsnow.GuardarArray.*;
 
 public class Insersio {
     static Scanner teclat = new Scanner (System.in);
-    
-    public static void main(String[] args){
+    private final int TA = 200;
+    Bota[] botes = GuardarArray.getBotes();
+    Esqui[] esquis = GuardarArray.getEsqui();
+    Pal[] pals =  GuardarArray.getPals();
+    static Connection conn = null;
+    static Scanner sc = null;
+    static PreparedStatement ps = null;
+
+    public static boolean Insersio(){
         boolean sortir=false;
         int opcio;
 
@@ -25,7 +34,16 @@ public class Insersio {
     System.out.println("|                 | | _  | | | | | |\\__ \\|  __/| |  | (__ | || (_) |                      |");
     System.out.println("|                 |_|(_)|___||_| |_||___/ \\___||_|   \\___||_| \\___/                       |");                                        
     System.out.println("|                                                                                             |");
-    System.out.println("|                                                                                              |");
+    System.out.println("|                                                                                             |");
+    System.out.println("|                                                                                             |");
+    System.out.println("|       1. Esquis                                                                                         |");
+    System.out.println("|                                                                                             |");
+    System.out.println("|       2. Botes                                                                                      |");
+    System.out.println("|                                                                                             |");
+    System.out.println("|       3.Pals                                                                                       |");
+    System.out.println("|                                                                                             |");
+    System.out.println("|                                                                                             |");
+    System.out.println("|       4.Tornar                                                                                      |");
     System.out.println("|                                                                                              |");
     System.out.println("===============================================================================================");
 
@@ -34,13 +52,18 @@ public class Insersio {
     switch (opcio){
         
                 case 1:
-                    System.out.println("Has triat l'opcio 1");
-                    
-                    Insersio tenda = new Insersio();
-                    tenda.llogarKits();
+                        inserirEsquis();
                     break;
 
                 case 2:
+                        inserirBotes();
+                    break;
+
+                case 3:
+                        inserirPals();
+                    break;
+
+                case 4:
                     System.out.println("Adeu");
                     sortir=true;
                     break;
@@ -50,154 +73,236 @@ public class Insersio {
             }
     
         }
-        
+        return true; 
     }
     
     // Inserir productes
 
-    private final int TA = 200;
-    Bota[] botes = GuardarArray.getBotes();
-    Esqui[] esquis = GuardarArray.getEsqui();
-    Pal[] pals =  GuardarArray.getPals();
-    Connection con = null;
-        
-    private void llogarKits(){
-        
-        if (!obtenirKitsBotesPalsEsquisBD()){
-            
-            System.out.println("ERROR: No s'han pogut carregar a memòria: esquis, botes, pals, esquis");
-            System.out.println("Intentau un altre dia");
-            
-        } else {
-            
+    
+
+    public static boolean inserirBotes(){
+
+        try {
+            sc = new Scanner(System.in);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
+
+                if (conn != null) {
+                    ps = conn.prepareStatement("INSERT INTO botes (marca, color, talla, preu, categoria) VALUES (?, ?, ?, ?, ?)");
+
+                    if (ps != null) {
+                                                
+                        System.out.println("Insererix la marca");
+                        String marca = sc.next();
+
+                        System.out.println("Insereix el color");
+                        String color = sc.next();
+
+                        System.out.println("Insereix la talla");
+                        int talla = sc.nextInt();
+
+                        System.out.println("Insereix el preu");
+                        Double preu = sc.nextDouble();
+
+                        System.out.println("Insereix la categoria");
+                        String categoria = sc.next();
+
+                        ps.setString(1, marca);
+                        ps.setString(2, color);
+                        ps.setInt(3, talla);
+                        ps.setDouble(4, preu);
+                        ps.setString(5, categoria);
+
+                        int res = ps.executeUpdate();
+
+                        Bota bota = new Bota();
+
+                        bota.setMarcaBotes(marca);
+                        bota.setColorBota(color);
+                        bota.setTallaBotes(talla);
+                        bota.setPreuBotes(preu);
+                        bota.setCategoriaBotes(categoria);
+
+                        if (res == 0) {
+                            System.out.println("No s'ha pogut inserir el producte");
+                        } else{
+                            System.out.println("El producte s'ha inserit correctament");
+                        }
+
+                    }
+
+                }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try{
+                if (conn != null) {
+                    conn.close();
+                }
+            }catch (SQLException se){
+                se.printStackTrace();
+            }            
         }
-    
+
+        return true;
     }
-    
-    private boolean obtenirKitsBotesPalsEsquisBD(){  
-        try{
-            con = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
-            
-            obtenirEsquis();
-            obtenirPals();
-            obtenirBotes();
-                    
-        } catch(Exception e){
-            
+        
+    public static boolean inserirEsquis(){
+
+        try {
+            sc = new Scanner(System.in);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
+
+                if (conn != null) {
+                    ps = conn.prepareStatement("INSERT INTO esquis (marca, color, talla, preu, categoria) VALUES (?, ?, ?, ?, ?)");
+
+                    if (ps != null) {
+                                                
+                        System.out.println("Insererix la marca");
+                        String marca = sc.next();
+
+                        System.out.println("Insereix el color");
+                        String color = sc.next();
+
+                        System.out.println("Insereix la talla");
+                        int talla = sc.nextInt();
+
+                        System.out.println("Insereix el preu");
+                        Double preu = sc.nextDouble();
+
+                        System.out.println("Insereix la categoria");
+                        String categoria = sc.next();
+
+                        ps.setString(1, marca);
+                        ps.setString(2, color);
+                        ps.setInt(3, talla);
+                        ps.setDouble(4, preu);
+                        ps.setString(5, categoria);
+
+                        int res = ps.executeUpdate();
+
+                        Esqui esqui = new Esqui();
+
+                        esqui.setMarcaEsquis(marca);
+                        esqui.setColorEsquis(color);
+                        esqui.setTallaEsquis(talla);
+                        esqui.setPreuEsquis(preu);
+                        esqui.setCategoriaEsquis(categoria);
+
+                        if (res == 0) {
+                            System.out.println("No s'ha pogut inserir el producte");
+                        } else{
+                            System.out.println("El producte s'ha inserit correctament");
+                        }
+
+                    }
+
+                }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try{
+                if (conn != null) {
+                    conn.close();
+                }
+            }catch (SQLException se){
+                se.printStackTrace();
+            }            
         }
         return true;
     }
-    
-    private void obtenirEsquis(){
-        
-        try{
-            
-        Statement st = con.createStatement();
-        String esquisprod = "SELECT * FROM esquis;";
-        ResultSet rs = st.executeQuery(esquisprod);
-        int i=0;
-        
-        while (rs.next()){
-            
-            Esqui esqui = new Esqui();
-            esqui.setIdEsquis(rs.getInt("id_esquis"));
-            esqui.setMarcaEsquis(rs.getString("marca"));
-            esqui.setColorEsquis(rs.getString("color"));
-            esqui.setTallaEsquis(rs.getInt("talla"));
-            esqui.setPreuEsquis(rs.getDouble("preu"));
-            
-            esquis[i] = esqui;
-            i++; 
-            
-            esqui.toString();
-        }
-        visualitzarEsquis();
+
+    public static boolean inserirPals(){
+
+        try {
+            sc = new Scanner(System.in);
+            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
+
+                if (conn != null) {
+                    ps = conn.prepareStatement("INSERT INTO pals (marca, color, talla, preu, categoria) VALUES (?, ?, ?, ?, ?)");
+
+                    if (ps != null) {
+                                                
+                        System.out.println("Insererix la marca");
+                        String marca = sc.next();
+
+                        System.out.println("Insereix el color");
+                        String color = sc.next();
+
+                        System.out.println("Insereix la talla");
+                        int talla = sc.nextInt();
+
+                        System.out.println("Insereix el preu");
+                        Double preu = sc.nextDouble();
+
+                        System.out.println("Insereix la categoria");
+                        String categoria = sc.next();
+
+                        ps.setString(1, marca);
+                        ps.setString(2, color);
+                        ps.setInt(3, talla);
+                        ps.setDouble(4, preu);
+                        ps.setString(5, categoria);
+
+                        int res = ps.executeUpdate();
+
+                        Pal pal = new Pal();
+
+                        pal.setMarcaPals(marca);
+                        pal.setColorPal(color);
+                        pal.setTallaPals(talla);
+                        pal.setPreuPals(preu);
+                        pal.setCategoriaPals(categoria);
+
+                        if (res == 0) {
+                            System.out.println("No s'ha pogut inserir el producte");
+                        } else{
+                            System.out.println("El producte s'ha inserit correctament");
+                        }
+
+                    }
+
+                }
+
+        } catch (SQLException se) {
+            se.printStackTrace();
         } catch (Exception e){
-            
+            e.printStackTrace();
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+            } catch (SQLException se) {
+                se.printStackTrace();
+            }
+            try{
+                if (conn != null) {
+                    conn.close();
+                }
+            }catch (SQLException se){
+                se.printStackTrace();
+            }            
         }
-        
+        return true;
     }
-    
-    private void obtenirPals(){
-        
-        try{
-            
-        Statement st = con.createStatement();
-        String palsprod = "SELECT * FROM pals;";
-        ResultSet rs = st.executeQuery(palsprod);
-        int i=0;
-        
-        while (rs.next()){
-            
-            Pal pal = new Pal();
-            pal.setIdPals(rs.getInt("id_pals"));
-            pal.setMarcaPals(rs.getString("marca"));
-            pal.setColorPal(rs.getString("color"));
-            pal.setTallaPals(rs.getInt("talla"));
-            pal.setPreuPals(rs.getDouble("preu"));
-            
-            pals[i] = pal;
-            i++; 
-            
-            pal.toString();
-        }
-        visualitzarPals();
-        } catch (Exception e){
-            
-        }
-        
-    }
-     
-    private void obtenirBotes(){
-        
-        try{
-            
-        Statement st = con.createStatement();
-        String botesprod = "SELECT * FROM botes;";
-        ResultSet rs = st.executeQuery(botesprod);
-        int i=0;
-        
-        while (rs.next()){
-            
-            Bota bota = new Bota();
-            bota.setIdBotes(rs.getInt("id_botes"));
-            bota.setMarcaBotes(rs.getString("marca"));
-            bota.setColorBota(rs.getString("color"));
-            bota.setTallaBotes(rs.getInt("talla"));
-            bota.setPreuBotes(rs.getDouble("preu"));
-            
-            botes[i] = bota;
-            i++; 
-            
-            bota.toString();
-        }
-        visualitzarEsquis();
-        } catch (Exception e){
-            
-        }
-        
-    } 
-    
-    private void visualitzarEsquis(){
-    System.out.println("ELS ESQUIS QUE HI HA: \n");
-    for (int i=0; (i<TA && esquis[i] !=null); i++){
-    System.out.println("Esqui: " + esquis [i]);
-      }
-    }
-    
-    private void visualitzarPals(){
-    System.out.println("ELS PALS QUE HI HA: \n");
-    for (int i=0; (i<TA && pals[i] !=null); i++){
-    System.out.println("Pal: " + pals [i]);
-      }
-    }
-        
-    private void visualitzarBotes(){
-    System.out.println("ELS BOTES QUE HI HA: \n");
-    for (int i=0; (i<TA && botes[i] !=null); i++){
-    System.out.println("Bota: " + botes [i]);
-      }
-    }
-    
-    
 }
