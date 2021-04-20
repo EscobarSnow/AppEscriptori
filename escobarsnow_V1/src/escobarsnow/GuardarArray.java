@@ -59,12 +59,15 @@ public class GuardarArray {
             obtenirBotes();
            
             obtenirPals();
+
+            obtenirKits();
             
         } catch (Exception e) {
             e.printStackTrace();
         }
         return true;
     }
+    
     private void obtenirEsquis(){
         try {
             Statement st = conn.createStatement();
@@ -211,7 +214,7 @@ public class GuardarArray {
                                 cercar++;
                             } else { l++;}
                         }
-                    kit.setData(rs.getDate("data"));
+                    kit.setData(rs.getString("data"));
                         
                     kits[i] = kit;
 
