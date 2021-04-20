@@ -73,7 +73,11 @@ public class Escobarsnow {
                 break;
                 
                 case 2:
-                    //insertar
+                    if (Insersio.Insersio()) {
+                        
+                    } else{
+                        System.out.println("Torna a intentar");
+                    }
                     break;
                 case 3:
                     if (CrearKit.CrearKit()) {
