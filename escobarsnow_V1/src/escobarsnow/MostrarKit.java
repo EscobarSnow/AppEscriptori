@@ -157,57 +157,23 @@ public class MostrarKit {
 
     private void conseguirKitsDia(){
         
-            System.out.println("Insereix una data");
+        System.out.println("Insereix una data");
         String data = teclat.next();
         
         boolean trobarData = false;
         int k = 0;
-//         
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-//         
-        // REVISAR!!!!
-//         
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-// 
-//         
+
         while (!trobarData) {
                 
                 if (kits[k].getData().equals(data)) {
                     System.out.println("Els kits que existeixen el dia " + data + " són: " + kits[k]);
                     
-                    trobarData = true;
+                    // trobarData = true;
                 } else {
                     k++;
                 }
 
         }
-        
-        
-
-        // visualitzarKits();
     }
 
     //Mostrar tots els kits
