@@ -118,7 +118,6 @@ public class CrearKit {
 
                             System.out.println("Preu total del kit: " + preuTotalKit);
                             
-                            // return preuTotalKit;
                             ps.setInt(1, idBot);
                             ps.setInt(2, idEsq);
                             ps.setInt(3, idPal);
@@ -126,6 +125,16 @@ public class CrearKit {
                             ps.setDouble(5, preuTotalKit);
 
                             int res = ps.executeUpdate();
+
+                            Kit kit = new Kit();
+
+                           
+                            kit.setBota(botes[j]);
+                            kit.setEsqui(esquis[i]);
+                            kit.setPal(pals[k]);
+                            kit.setData(data);
+                            kit.setPreuTotal(preuTotalKit);
+
                             if (res == 0) {
                                 System.out.println("No s'ha pogut crear el kit");
                             } else{
