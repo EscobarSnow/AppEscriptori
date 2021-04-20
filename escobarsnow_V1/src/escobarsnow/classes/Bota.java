@@ -8,8 +8,7 @@ public class Bota {
     private double preuBotes;
     private String categoriaBotes;
 
-   
- 
+
     public Bota(){
 
     }

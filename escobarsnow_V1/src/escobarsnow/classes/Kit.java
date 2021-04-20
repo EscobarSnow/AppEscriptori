@@ -8,19 +8,15 @@ public class Kit {
     private Esqui esqui;
     private Bota bota;
     private Pal pal;
-    private Date data;
-
-   
-
-    
+    private String data;
 
     public Kit() {
     
     }
 
-    public void Kits(int idKit, double preuTotal, Esqui esqui, Bota bota, Pal pal, Date data) {
+    public void Kits(int idKit, double preuTotal, Esqui esqui, Bota bota, Pal pal, String data) {
         this.idKit = idKit;
-        this.preuTotal = this.esqui.getPreuEsquis()+this.bota.getPreuBotes()+this.pal.getPreuPals();
+        this.preuTotal = preuTotal;
         this.esqui = esqui;
         this.bota = bota;
         this.pal = pal;
@@ -35,11 +31,11 @@ public class Kit {
     }
 
     public void setPreuTotal(double preuTotal) {
-        this.preuTotal = this.esqui.getPreuEsquis()+this.bota.getPreuBotes()+this.pal.getPreuPals();
+        this.preuTotal = preuTotal;
     }
 
     public Double getPreuTotal(){
-        return this.esqui.getPreuEsquis()+this.bota.getPreuBotes()+this.pal.getPreuPals();
+        return this.preuTotal;
     }
     
     public Esqui getEsqui() {
@@ -66,12 +62,12 @@ public class Kit {
         this.pal = pal;
     }
 
-    public Date getData() {
+    public String getData() {
         return this.data;
     }
 
-    public void setData(Date date) {
-        this.data = date;
+    public void setData(String data) {
+        this.data = data;
     }
     
     public String toString() {
