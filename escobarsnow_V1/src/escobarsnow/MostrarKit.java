@@ -25,9 +25,6 @@ public class MostrarKit {
     public static int cercar = 0; 
 
     private final int TA = 200;
-    // Bota[] botes;
-    // Esqui[] esquis;
-    // Pal[] pals;
     Bota[] botes = GuardarArray.getBotes();
     Esqui[] esquis = GuardarArray.getEsqui();
     Pal[] pals =  GuardarArray.getPals();
@@ -111,6 +108,11 @@ public class MostrarKit {
 
                         case 3:
 
+                            if (kitEconomic()) {
+                            }else{
+                                System.out.println("Torna a intentar");
+                            }
+
                             break;
 
                         case 4:
@@ -128,7 +130,6 @@ public class MostrarKit {
     }
 
     // Mostrar els kits d'un dia
-
     public static boolean kitsDia() {
         
         MostrarKit dia = new MostrarKit();
@@ -188,8 +189,6 @@ public class MostrarKit {
     public static boolean kitMostrar() {
         MostrarKit tenda = new MostrarKit();
         tenda.showKits();
-
-
 
         return true;
     }
@@ -268,7 +267,8 @@ public class MostrarKit {
                             } else { l++;}
                         }
                         
- 
+                        // kit.getPreuTotal();
+
                     kits[i] = kit;
 
                     i++;
@@ -293,4 +293,75 @@ public class MostrarKit {
                System.out.println("Kits: " + kits[i]);
            }
     } 
+
+    // Mostrar kits económics
+
+    public static boolean kitEconomic() {
+        
+        MostrarKit economic = new MostrarKit();
+        economic.showKitsEconomics();
+
+        return true;
+    }
+
+    private void showKitsEconomics(){
+
+        if (!conseguirKitsEco()) {
+            System.out.println("Error");
+        }
+    }
+
+    private boolean conseguirKitsEco(){
+        
+        try {
+            conseguirKitsEconomics();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
+
+    private void conseguirKitsEconomics(){
+        
+        boolean trobat = false;
+        int x = 0;
+
+        System.out.println("Busca els kits més cars o barats");
+        System.out.println("C = cars \n B = barats");
+        Scanner teclat = new Scanner(System.in);
+
+        String ordenar = teclat.next();
+
+        double minPreu = akits[0].getPreuTotal();
+        double maxPreu = akits[0].getPreuTotal();
+
+        if (ordenar.equals("C")) {
+            while (!trobat){
+                Kit kit = new Kit();
+                for (int i = 0; i < akits.length; i++) {
+                    if (akits[i].getPreuTotal() <  minPreu) minPreu=akits[i].getPreuTotal();
+                    trobat = true;
+                }
+
+                kit.toString();
+            }
+            
+        } else if (ordenar.equals("B")){
+            while (!trobat) {
+                Kit kit = new Kit();
+                for (int i = 0; i < akits.length; i++) {
+                    if (akits[i].getPreuTotal() > maxPreu) maxPreu=akits[i].getPreuTotal();
+                    trobat = true;
+                }
+                kit.toString();
+            }
+        
+        }
+
+        
+       
+        visualitzarKits();
+    }
+
 }

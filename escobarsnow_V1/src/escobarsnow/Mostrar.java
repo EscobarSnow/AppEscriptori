@@ -1,10 +1,9 @@
 
 package escobarsnow;
 
-import escobarsnow.classes.Bota;
-import escobarsnow.classes.Esqui;
-import escobarsnow.classes.Kit;
-import escobarsnow.classes.Pal;
+import escobarsnow.classes.*;
+import escobarsnow.GuardarArray.*;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -23,6 +22,8 @@ public class Mostrar {
 
     boolean sortir=false;
     String opcio;
+
+
 
     while (!sortir) {
                         System.out.println(" ==============================================================================================================");
@@ -96,13 +97,10 @@ public class Mostrar {
     }
         return true;
 }
-    private final int TAMANYARRAY = 200;
-    
-    //variables globals
-    Bota[] botes = new Bota [TAMANYARRAY];
-    Esqui[] esquis = new Esqui [TAMANYARRAY];
-    Pal[] pals = new Pal [TAMANYARRAY];
-    Kit[] kits = new Kit [TAMANYARRAY];
+    private final int TA = 200;
+    Bota[] botes = GuardarArray.getBotes();
+    Esqui[] esquis = GuardarArray.getEsqui();
+    Pal[] pals =  GuardarArray.getPals();
     
     //guardar el numero de kits
     int numKits = 0;
@@ -224,7 +222,7 @@ public class Mostrar {
     private void visualitzarEsquis(){
         //System.out.println("ESQUIS des de ARRAYS: \n");
         
-        for (int i = 0; (i < TAMANYARRAY && esquis [i] != null); i++){
+        for (int i = 0; (i < TA && esquis [i] != null); i++){
             System.out.println(esquis[i]);
         }
     }
@@ -232,7 +230,7 @@ public class Mostrar {
     private void visualitzarBotes(){
         //System.out.println("Botes des de ARRAYS: \n");
         
-        for (int i = 0; (i < TAMANYARRAY && botes [i] != null); i++){
+        for (int i = 0; (i < TA && botes [i] != null); i++){
             System.out.println(botes[i]);
         }
     }
@@ -240,7 +238,7 @@ public class Mostrar {
     private void visualitzarPals(){
         //System.out.println("PALS des de ARRAYS: \n");
         
-        for (int i = 0; (i < TAMANYARRAY && pals [i] != null); i++){
+        for (int i = 0; (i < TA && pals [i] != null); i++){
             System.out.println(pals[i]);
         }
     }
