@@ -71,7 +71,7 @@ public class Kit {
     }
     
     public String toString() {
-        return  " ID kit: " + this.idKit +" Esqui: "+ this.esqui + " Botes: " + this.bota + " Pals: " + this.pal + " Preu Total: " + this.preuTotal + " Data: " + this.data;
+        return  " ID kit: " + this.idKit +" Esqui: "+ this.esqui + " Botes: " + this.bota + " Pals: " + this.pal + " Preu Total: " + this.preuTotal + "€" + " Data: " + this.data;
     }
    
    
