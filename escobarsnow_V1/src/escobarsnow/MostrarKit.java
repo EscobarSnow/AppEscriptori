@@ -1,3 +1,4 @@
+// Pantalla per a les funcions de mostrar kits
 package escobarsnow;
 
 
@@ -8,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Scanner;
 import java.text.SimpleDateFormat;  
@@ -22,21 +24,22 @@ public class MostrarKit {
     static Scanner teclat = new Scanner (System.in);
     static String opcio;
 
+    // Cridar arrays amb les dades
     private final int TA = 200;
-    Bota[] botes = GuardarArray.getBotes();
-    Esqui[] esquis = GuardarArray.getEsqui();
-    Pal[] pals =  GuardarArray.getPals();
-    Kit[] kits = GuardarArray.getKits();
+    static Bota[] botes = GuardarArray.getBotes();
+    static Esqui[] esquis = GuardarArray.getEsqui();
+    static Pal[] pals =  GuardarArray.getPals();
+    static Kit[] kits = GuardarArray.getKits();
 
-    // Kit[] kits = new Kit[200];
     Connection conn = null;
 
     public static boolean MostrarKit() {
         Scanner teclat = new Scanner(System.in);
 
         boolean sortir=false;
-        int opcio; //Cambi de string a int
-
+        int opcio; 
+        
+            // Menú
             while (!sortir) {
                 System.out.println(" ==============================================================================================================");
                 System.out.println("│                                                                                                             │");
@@ -47,36 +50,48 @@ public class MostrarKit {
                                    "│ █████╗████╔╝╚███╔╝╚██╔╝████╦╝█║░█║█║░██║████╔╝█║░╚█║╚██╔╝░╚█╔╝░╚█╔╝░ │\n" +
                                    "│ ╚════╝╚═══╝░░╚══╝░░╚═╝░╚═══╝░╚╝░╚╝╚╝░╚═╝╚═══╝░╚╝░░╚╝░╚═╝░░░╚╝░░░╚╝░░ │");
                 System.out.println("│                                                                                                             │");
-                System.out.println("│                                   __  __              _                       _     _  _                                         │");
-                System.out.println("│                                  |  \\/  |  ___   ___ | |_  _ __  __ _  _ __  | | __(_)| |_                                        │");
-                System.out.println("│                                  | |\\/| | / _ \\ / __|| __|| '__|/ _` || '__| | |/ /| || __|                                         │");
-                System.out.println("│                                  | |  | || (_) |\\__ \\| |_ | |  | (_| || |    |   < | || |_                                         │");
-                System.out.println("│                                  |_|  |_| \\___/ |___/ \\__||_|   \\__,_||_|    |_|\\_\\|_| \\__|                                                  │");
+                System.out.println("│                                   __  __              _                       _     _  _                    │");
+                System.out.println("│                                  |  \\/  |  ___   ___ | |_  _ __  __ _  _ __  | | __(_)| |_                  │");
+                System.out.println("│                                  | |\\/| | / _ \\ / __|| __|| '__|/ _` || '__| | |/ /| || __|                 │");
+                System.out.println("│                                  | |  | || (_) |\\__ \\| |_ | |  | (_| || |    |   < | || |_                  │");
+                System.out.println("│                                  |_|  |_| \\___/ |___/ \\__||_|   \\__,_||_|    |_|\\_\\|_| \\__|                 │");
                 System.out.println("│                                                                                                             │");
                 System.out.println(" ==============================================================================================================");
-                System.out.println("│  _      _  __ _  _         _        _       _  _                                                                                                                   │");
-                System.out.println("│ / |    | |/ /(_)| |_    __| |  ___ | |   __| |(_)  __ _                                                                                                            │");
-                System.out.println("│ | |    | ' / | || __|  / _` | / _ \\| |  / _` || | / _` |                                                                                                           │");
-                System.out.println("│ | | _  | . \\ | || |_  | (_| ||  __/| | | (_| || || (_| |                                                                                                           │");
-                System.out.println("│ |_|(_) |_|\\_\\|_| \\__|  \\__,_| \\___||_|  \\__,_||_| \\__,_|                                                                                                           │");
+                System.out.println("│  _      _  __ _  _         _        _       _  _                                                            │");
+                System.out.println("│ / |    | |/ /(_)| |_    __| |  ___ | |   __| |(_)  __ _                                                     │");
+                System.out.println("│ | |    | ' / | || __|  / _` | / _ \\| |  / _` || | / _` |                                                    │");
+                System.out.println("│ | | _  | . \\ | || |_  | (_| ||  __/| | | (_| || || (_| |                                                    │");
+                System.out.println("│ |_|(_) |_|\\_\\|_| \\__|  \\__,_| \\___||_|  \\__,_||_| \\__,_|                                                    │");
                 System.out.println("│                                                                                                             │");
-                System.out.println("│ ____       _  __ _  _                                                                                                                 │");
-                System.out.println("│ |___ \\     | |/ /(_)| |_  ___                                                                                                          │");
-                System.out.println("│   __) |    | ' / | || __|/ __|                                                                                                         │");
-                System.out.println("│  / __/  _  | . \\ | || |_ \\__ \\                                                                                                         │");
-                System.out.println("│ |_____|(_) |_|\\_\\|_| \\__||___/                                                                                                         │");
+                System.out.println("│ ____       _  __ _  _                                                                                       │");
+                System.out.println("│ |___ \\     | |/ /(_)| |_  ___                                                                               │");
+                System.out.println("│   __) |    | ' / | || __|/ __|                                                                              │");
+                System.out.println("│  / __/  _  | . \\ | || |_ \\__ \\                                                                              │");
+                System.out.println("│ |_____|(_) |_|\\_\\|_| \\__||___/                                                                              │");
                 System.out.println("│                                                                                                             │");
-                System.out.println("│ _____     _  __ _  _                  __                                                                                                                                  │");
-                System.out.println("│ |___ /    | |/ /(_)| |_   _ __ ___    /_/  ___    ___  __ _  _ __                                                                                                           │");
-                System.out.println("│   |_ \\    | ' / | || __| | '_ ` _ \\  / _ \\/ __|  / __|/ _` || '__|                                                                                                         │");
-                System.out.println("│  ___) |_  | . \\ | || |_  | | | | | ||  __/\\__ \\ | (__| (_| || |                                                                                                            │");
-                System.out.println("│ |____/(_) |_|\\_\\|_| \\__| |_| |_| |_| \\___||___/  \\___|\\__,_||_|                                                                                                           │");
-                System.out.println("│                                                                                                            │");
-                System.out.println("│  _  _       _____                                                                                                                                         │");
-                System.out.println("│ | || |     |_   _|___   _ __  _ __    __ _  _ __                                                                                                          │");
-                System.out.println("│ | || |_      | | / _ \\ | '__|| '_ \\  / _` || '__|                                                                                                         │");
-                System.out.println("│ |__   _|_    | || (_) || |   | | | || (_| || |                                                                                                            │");
-                System.out.println("│    |_| (_)   |_| \\___/ |_|   |_| |_| \\__,_||_|                                                                                                           │");
+                System.out.println("│ _____     _  __ _  _                               __               _                                       │");
+                System.out.println("│ |___ /    | |/ /(_)| |_    ___   ___  ___   _ __    \\_\\   _ __ ___  (_)  ___                                │");
+                System.out.println("│   |_ \\    | ' / | || __|  / _ \\ / __|/ _ \\ | '_ \\  / _ \\ | '_ ` _ \\ | | / __|                               │");
+                System.out.println("│  ___) |_  | . \\ | || |_  |  __/| (__| (_) || | | || (_) || | | | | || || (__                                │");
+                System.out.println("│ |____/(_) |_|\\_\\|_| \\__|  \\___| \\___|\\___/ |_| |_| \\___/ |_| |_| |_||_| \\___|                               │");
+                System.out.println("│                                                                                                             │");
+                System.out.println("│                                                                                                             │");
+                System.out.println("│  _  _       ____                   _                    _     _  _                                          │");
+                System.out.println("│ | || |     |  _ \\  _ __  ___    __| |      ___  _ __   | | __(_)| |_  ___                                   │");
+                System.out.println("│ | || |_    | |_) || '__|/ _ \\  / _` |     / _ \\| '_ \\  | |/ /| || __|/ __|                                  │");
+                System.out.println("│ |__   _|_  |  __/ | |  | (_) || (_| | _  |  __/| | | | |   < | || |_ \\__ \\                                  │");
+                System.out.println("│    |_| (_) |_|    |_|   \\___/  \\__,_|(_)  \\___||_| |_| |_|\\_\\|_| \\__||___/                                  │");
+                System.out.println("│                                                                                                             │");
+                System.out.println("│                                                                                                             │");
+                System.out.println("│                                                                                                             │");
+                System.out.println("│                                                                                                             │");
+                System.out.println("│                                                                                                             │");
+                System.out.println("│  ____      _____                                                                                            │");
+                System.out.println("│ | ___|    |_   _|___   _ __  _ __    __ _  _ __                                                             │");
+                System.out.println("│ |___ \\      | | / _ \\ | '__|| '_ \\  / _` || '__|                                                            │");
+                System.out.println("│  ___) |_    | || (_) || |   | | | || (_| || |                                                               │");
+                System.out.println("│ |____/(_)   |_| \\___/ |_|   |_| |_| \\__,_||_|                                                               │");
+                System.out.println("│                                                                                                             │");
                 System.out.println("│                                                                                                             │");
                 System.out.println(" ==============================================================================================================");
 
@@ -115,9 +130,16 @@ public class MostrarKit {
 
                         case 4:
 
+                            if (prodEnKits()) {
+                            } else {
+                                System.out.println("Torna a intentar");
+                            }
+                            
+                        case 5:
+
                             sortir = true;
                             break;
-                    
+
                         default:
                             break;
                     }
@@ -168,7 +190,7 @@ public class MostrarKit {
                 if (kits[k].getData().equals(data)) {
                     System.out.println("Els kits que existeixen el dia " + data + " són: " + kits[k]);
                     
-                    // trobarData = true;
+                    trobarData = true;
                 } else {
                     k++;
                 }
@@ -313,44 +335,143 @@ public class MostrarKit {
 
     private void conseguirKitsEconomics(){
         
-        boolean trobat = false;
-        int x = 0;
+        int i = 0;
+        double preuMin = 1000000;
 
-        System.out.println("Busca els kits més cars o barats");
-        System.out.println("C = cars \n B = barats");
-        Scanner teclat = new Scanner(System.in);
+        Kit kitMin = null;
 
-        String ordenar = teclat.next();
-
-        double minPreu = kits[0].getPreuTotal();
-        double maxPreu = kits[0].getPreuTotal();
-
-        if (ordenar.equals("C")) {
-            while (!trobat){
-                Kit kit = new Kit();
-                for (int i = 0; i < kits.length; i++) {
-                    if (kits[i].getPreuTotal() <  minPreu) minPreu=kits[i].getPreuTotal();
-                    trobat = true;
-                }
-
-                kit.toString();
-            }
+        while (kits[i] != null) {
             
-        } else if (ordenar.equals("B")){
-            while (!trobat) {
-                Kit kit = new Kit();
-                for (int i = 0; i < kits.length; i++) {
-                    if (kits[i].getPreuTotal() > maxPreu) maxPreu=kits[i].getPreuTotal();
-                    trobat = true;
-                }
-                kit.toString();
+            if (kits[i].getPreuTotal() < preuMin) {
+                preuMin = kits[i].getPreuTotal();
+                kitMin = kits[i];
             }
-        
+            i++;
         }
+        System.out.println("Kit més barat: " + kitMin.toString());
+    }
 
-        
-       
-        visualitzarKits();
+    // Mostrar en quants kits forma part un prod
+    
+    public static boolean prodEnKits(){
+
+        System.out.println("\nApreta E per mostrar els esquis");
+        System.out.println("Apreta P per mostrar els pals");
+        System.out.println("Apreta B per mostrar les botes");
+        System.out.println("Apreta X per sortir....");
+
+        boolean sortir=false;
+        opcio=teclat.next();
+            switch(opcio.charAt(0)){
+
+                case 'E':
+                    if (esquisKits()) {
+                    } else{
+                        System.out.println("Torna a intentar");
+                    }
+                    break;
+
+                case 'P':
+                    if (palsKits()) {
+                    } else{
+                        System.out.println("Torna a intentar");
+                    }
+                    break;
+
+                case 'B':
+                    if (botesKits()) {
+                    } else{
+                        System.out.println("");
+                    }
+                    break;
+
+                case 'X':
+                        sortir = true;
+                    break;
+
+
+
+            }
+        return true;
+    }
+
+    public static boolean esquisKits(){
+            System.out.println("Quin id d'esqui vols contar?");
+
+            int num = teclat.nextInt();
+            int contador = 0;
+            
+            int i = 0;
+            boolean trobat = false;
+
+            while (!trobat) {
+                     
+                    if (num == kits[i].getEsqui().getIdEsquis()) {
+                        contador++;
+                        System.out.println("Els kits en que pertany: " + kits[i]);
+                    trobat = true;
+
+                    } else{
+                        // i++;  
+                        System.out.println("No forma part de cap Kit");
+                        trobat = true;   
+                    }
+                
+            }
+        return true;
+    }
+
+    public static boolean botesKits(){
+        System.out.println("Quin id de botes vols contar?");
+
+            int num = teclat.nextInt();
+            int contador = 0;
+            
+            int i = 0;
+            boolean trobat = false;
+
+            while (!trobat) {
+                     
+                    if (num == kits[i].getBota().getIdBotes()) {
+                        contador++;
+                        System.out.println("Els kits en que pertany: " + kits[i]);
+                    trobat = true;
+
+                    } else{
+                        // i++;  
+                        System.out.println("No forma part de cap Kit");
+                        trobat = true;   
+                    }
+                
+            }
+        return true;
+    }
+
+    public static boolean palsKits(){
+
+        System.out.println("Quin id de pals vols contar?");
+
+            int num = teclat.nextInt();
+            int contador = 0;
+            
+            int i = 0;
+            boolean trobat = false;
+
+            while (!trobat) {
+                     
+                    if (num == kits[i].getPal().getIdPals()) {
+                        contador++;
+                        System.out.println("Els kits en que pertany: " + kits[i]);
+                    trobat = true;
+
+                    } else {
+                        // i++;  
+                        System.out.println("No forma part de cap Kit");
+                        trobat = true;  
+                    } 
+                
+            }
+        return true;
     }
 
 }
