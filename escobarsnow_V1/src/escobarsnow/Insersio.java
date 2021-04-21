@@ -1,3 +1,4 @@
+// Pantalla per inserir productes
 package escobarsnow;
 
 import java.sql.Connection;
@@ -12,7 +13,10 @@ import escobarsnow.classes.*;
 import escobarsnow.GuardarArray.*;
 
 public class Insersio {
+
     static Scanner teclat = new Scanner (System.in);
+
+    // Crida dels arrays amb les dades
     private final int TA = 200;
     Bota[] botes = GuardarArray.getBotes();
     Esqui[] esquis = GuardarArray.getEsqui();
@@ -21,6 +25,7 @@ public class Insersio {
     static Scanner sc = null;
     static PreparedStatement ps = null;
 
+    // Menú
     public static boolean Insersio(){
         boolean sortir=false;
         int opcio;
@@ -77,9 +82,8 @@ public class Insersio {
     }
     
     // Inserir productes
-
     
-
+    // Inserir botes (insereix tant a la bd com a l'array)
     public static boolean inserirBotes(){
 
         try {
@@ -156,6 +160,7 @@ public class Insersio {
         return true;
     }
         
+    // Inserir esquis (insereix tant a la bd com a l'array)
     public static boolean inserirEsquis(){
 
         try {
@@ -231,6 +236,7 @@ public class Insersio {
         return true;
     }
 
+    // Inserir pals (insereix tant a la bd com a l'array)
     public static boolean inserirPals(){
 
         try {
