@@ -1,3 +1,4 @@
+// Arxiu per guardar les dades de la BD en arrays
 package escobarsnow;
 
 import java.sql.Connection;
@@ -10,6 +11,7 @@ import escobarsnow.classes.*;
 
 public class GuardarArray {
   
+    // Creem els arrays
     private final static int TA = 200;
     static Bota[] botes = new Bota[TA];
     static Esqui[] esquis = new Esqui[TA];
@@ -18,6 +20,7 @@ public class GuardarArray {
 
     Connection conn = null;
 
+    // Fem els següents statics per poder cridar-los en altres arxius
     static Bota[] getBotes(){
         return botes.clone();
     }
@@ -34,6 +37,7 @@ public class GuardarArray {
         return kits.clone();
     }
 
+    // Guardar arrays
 
     public static void saveArray() {
 
@@ -214,6 +218,7 @@ public class GuardarArray {
                                 cercar++;
                             } else { l++;}
                         }
+                    kit.setPreuTotal(rs.getDouble("preuTotal"));
                     kit.setData(rs.getString("data"));
                         
                     kits[i] = kit;
