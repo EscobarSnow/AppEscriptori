@@ -1,3 +1,4 @@
+// Funcionament de crear kits
 package escobarsnow;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -16,6 +17,8 @@ import escobarsnow.classes.*;
 import escobarsnow.GuardarArray.*;
 
 public class CrearKit {
+
+    // Crida dels arrays amb les dades
     private final int TA = 200;
     static Bota[] botes = GuardarArray.getBotes();
     static Esqui[] esquis = GuardarArray.getEsqui();
@@ -26,6 +29,7 @@ public class CrearKit {
 
     public static boolean CrearKit(){
 
+        // Insersio de kits (insereix tant a la bd com a l'array)
         Connection conn = null;
         Scanner sc = null;
     
@@ -107,7 +111,6 @@ public class CrearKit {
 
                     
                     // Calcular preu total
-
                     
                         if (esquis[i].getIdEsquis() == idEsq && botes[j].getIdBotes() == idBot && pals[k].getIdPals() == idPal) {
                             Double preuEsq = esquis[i].getPreuEsquis();
