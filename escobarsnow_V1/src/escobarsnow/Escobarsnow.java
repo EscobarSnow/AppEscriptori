@@ -1,30 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+// Pantalla principal de l'aplicació on es pot dirigir a les operacions requerides
 package escobarsnow;
 
 import java.sql.SQLException;
 import java.util.Scanner;
 import escobarsnow.GuardarArray;
 
-/**
- *
- * @author JO
- */
 public class Escobarsnow {
 
     static Scanner teclat = new Scanner (System.in);
     static String opcio;
     
     public static void main (String[] args) throws SQLException {
+        // Executem aquesta classe per a obtenir les dades de la bd i inseir-les en arrays
         GuardarArray.saveArray();
 
     Scanner teclat = new Scanner(System.in);
 
     boolean sortir=false;
-    int opcio; //De string a int
+    int opcio; 
             
     //MENU DE L'APLICACIO
 
