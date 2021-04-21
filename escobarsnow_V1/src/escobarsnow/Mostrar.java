@@ -1,4 +1,4 @@
-
+// Pantalla per a mostrar tots els productes o un tipus de producte (esquis, botes o pals)
 package escobarsnow;
 
 import escobarsnow.classes.*;
@@ -18,12 +18,10 @@ public class Mostrar {
     static String opcio;
 
     public static boolean Mostrar() throws SQLException {
-        Scanner teclat = new Scanner(System.in);
+    Scanner teclat = new Scanner(System.in);
 
     boolean sortir=false;
     String opcio;
-
-
 
     while (!sortir) {
                         System.out.println(" ==============================================================================================================");
@@ -61,7 +59,8 @@ public class Mostrar {
                             System.out.format("%-2s %-20s %-15s %-15s %-15s %-15s %-15s", "", "ID PRODUCTE", "MARCA", "COLOR", "TALLA", "PREU", "CATEGORIA");
                             System.out.println("");
                             Mostrar esquis = new Mostrar();
-                            esquis.obtenirEsquis();
+                            // esquis.obtenirEsquis();
+                            esquis.visualitzarEsquis();
                             
                             System.out.println("\nApreta RETURN per sortir al submenu");
                             teclat.nextLine();
@@ -72,7 +71,8 @@ public class Mostrar {
                             System.out.format("%-2s %-20s %-15s %-15s %-15s %-15s %-15s", "", "ID PRODUCTE", "MARCA", "COLOR", "TALLA", "PREU", "CATEGORIA");
                             System.out.println("");
                             Mostrar pals = new Mostrar();
-                            pals.obtenirPals();
+                            // pals.obtenirPals();
+                            pals.visualitzarPals();
                             
                             System.out.println("\nApreta RETURN per sortir al submenu");
                             teclat.nextLine();
@@ -83,7 +83,8 @@ public class Mostrar {
                             System.out.format("%-2s %-20s %-15s %-15s %-15s %-15s %-15s", "", "ID PRODUCTE", "MARCA", "COLOR", "TALLA", "PREU", "CATEGORIA");
                             System.out.println("");
                             Mostrar botes = new Mostrar();
-                            botes.obtenirBotes();
+                            // botes.obtenirBotes();
+                            botes.visualitzarBotes();
                             
                             System.out.println("\nApreta RETURN per sortir al submenu");
                             teclat.nextLine();
@@ -97,128 +98,36 @@ public class Mostrar {
     }
         return true;
 }
+
+    // Crida dels arrays ja creats en l'arxiu GuardarArray.java
     private final int TA = 200;
     Bota[] botes = GuardarArray.getBotes();
     Esqui[] esquis = GuardarArray.getEsqui();
     Pal[] pals =  GuardarArray.getPals();
-    
-    //guardar el numero de kits
-    int numKits = 0;
-    
+        
+    // Mètodes de mostrar els productes
     private void llogarKits(){
         if (!obtenirKitsBotesPalsEsquisBD()){
             System.out.println("ERROR");
         }
     }
     
+    // Obtenir dades dels arrays
     private boolean obtenirKitsBotesPalsEsquisBD() {
         try{
-         
-            obtenirEsquis();
-            obtenirPals();
-            obtenirBotes();
-            
+
+            visualitzarEsquis();
+            visualitzarPals();
+            visualitzarBotes();
+
+
         }catch(Exception e){
             e.printStackTrace();
         }
         return true;
     }
     
-    private void obtenirEsquis() throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
-        try{
-            Statement st = conn.createStatement();
-            String query = "SELECT * FROM esquis";
-
-            ResultSet rs = st.executeQuery(query);
-
-            int i = 0;
-            while (rs.next()){
-
-            Esqui esqui = new Esqui();
-            esqui.setIdEsquis (rs.getInt("id_esquis"));
-            esqui.setMarcaEsquis(rs.getString("Marca"));
-            esqui.setColorEsquis (rs.getString("Color"));
-            esqui.setTallaEsquis (rs.getInt("Talla"));
-            esqui.setPreuEsquis (rs.getDouble("Preu"));
-            esqui.setCategoriaEsquis (rs.getString("Categoria"));
-
-            esquis[i] = esqui;
-            i++;
-            
-            esqui.toString();
-            
-            } 
-            visualitzarEsquis();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    
-    }
-
-    private void obtenirBotes() throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
-        try{
-            Statement st = conn.createStatement();
-            String query = "SELECT * FROM botes";
-
-            ResultSet rs = st.executeQuery(query);
-
-            int i = 0;
-            while (rs.next()){
-
-            Bota bota = new Bota();
-            bota.setIdBotes (rs.getInt("id_botes"));
-            bota.setMarcaBotes (rs.getString("Marca"));
-            bota.setColorBota (rs.getString("Color"));
-            bota.setTallaBotes (rs.getInt("Talla"));
-            bota.setPreuBotes (rs.getDouble("Preu"));
-            bota.setCategoriaBotes (rs.getString("Categoria"));
-
-            botes[i] = bota;
-            
-            i++;
-            
-            bota.toString();
-            
-            } 
-            visualitzarBotes();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    
-    private void obtenirPals() throws SQLException {
-        Connection conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/escobarsnow", "root", "");
-        try{
-            Statement st = conn.createStatement();
-            String query = "SELECT * FROM pals";
-
-            ResultSet rs = st.executeQuery(query);
-
-            int i = 0;
-            while (rs.next()){
-
-            Pal pal = new Pal();
-            pal.setIdPals (rs.getInt("id_pals"));
-            pal.setMarcaPals (rs.getString("Marca"));
-            pal.setColorPal (rs.getString("Color"));
-            pal.setTallaPals (rs.getInt("Talla"));
-            pal.setPreuPals (rs.getDouble("Preu"));
-            pal.setCategoriaPals (rs.getString("Categoria"));
-
-            pals[i] = pal;
-            
-            i++;
-            pals.toString();
-            
-            } 
-            visualitzarPals();
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-    }
-    
+    // Visualitzar els esquis
     private void visualitzarEsquis(){
         //System.out.println("ESQUIS des de ARRAYS: \n");
         
